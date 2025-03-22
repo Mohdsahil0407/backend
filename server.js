@@ -4,14 +4,13 @@ const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Allow requests from your frontend domain
+// ✅ Allow requests from your frontend
 app.use(cors({
-    origin: "*", // You can replace "*" with your frontend URL for better security
+    origin: "*", // Change "*" to your frontend URL for security
     methods: "GET,POST",
     allowedHeaders: "Content-Type"
 }));
 
-// ✅ Ensure backend can parse JSON requests
 app.use(express.json());
 
 app.post("/login", (req, res) => {
@@ -29,7 +28,6 @@ app.post("/login", (req, res) => {
     res.status(200).json({ message: "Login received" });
 });
 
-// ✅ Start server
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
