@@ -1,22 +1,18 @@
-console.log("Login API hit");
+const express = require("express");
+const cors = require("cors");
 
-const express = require("express"); // Import Express
-const app = express(); // Create an Express app
+const app = express();
+const PORT = process.env.PORT || 5000; // Use PORT from environment or default to 5000
 
-app.use(express.json()); // Middleware to parse JSON data
+app.use(cors());
+app.use(express.json());
 
-// API endpoint to receive login data
 app.post("/login", (req, res) => {
-    const { username, password } = req.body; // Extract username & password from request
+    console.log("Login API hit");
+    console.log("Received Username:", req.body.username);
+    console.log("Received Password:", req.body.password);
 
-    console.log("Received Username:", username);
-    console.log("Received Password:", password);
-
-    // You can add authentication logic here (e.g., check in a database)
-    
     res.status(200).json({ message: "Login received, redirecting to error page." });
 });
 
-// Start the backend server
-const PORT = 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
