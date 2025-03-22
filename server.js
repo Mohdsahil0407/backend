@@ -1,32 +1,23 @@
 const express = require("express");
 const cors = require("cors");
-const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
-
+app.use(express.json());
 app.use(cors());
-app.use(bodyParser.json());
 
-const users = [
-    { username: "testuser", password: "password123" },
-    { username: "admin", password: "admin123" }
-];
-
-// Login API
 app.post("/login", (req, res) => {
     const { username, password } = req.body;
 
-    const user = users.find(u => u.username === username && u.password === password);
+    console.log("Received Login Request:");
+    console.log("Username:", username);
+    console.log("Password:", password);
 
-    if (user) {
-        res.json({ success: true, message: "Login successful!" });
+    if (username === "testuser" && password === "password123") {
+        res.json({ message: "Login successful" });
     } else {
-        res.status(401).json({ success: false, message: "Invalid credentials!" });
+        res.status(401).json({ message: "Invalid credentials" });
     }
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
