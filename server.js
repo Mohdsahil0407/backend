@@ -1,3 +1,5 @@
+console.log("Login API hit");
+
 const express = require("express"); // Import Express
 const app = express(); // Create an Express app
 
